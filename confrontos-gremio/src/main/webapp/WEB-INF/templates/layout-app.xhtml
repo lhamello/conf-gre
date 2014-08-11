@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<title>Confrontos Grêmio</title>
+	</h:head>
+
+	<h:body>
+		<h:outputStylesheet name="default.css" library="css" />
+		<h:outputStylesheet name="gremio.css" library="css" />
+		<h:outputStylesheet name="/syntaxhighlighter/syntaxhighlighter.css" library="css"  />
+		<h:outputScript library="js/plugins" name="jquery.alphanum.js" target="head" />
+		<h:outputScript library="js" name="gremio.js" target="head" />
+
+		<div id="divHeader" style="display: inline-block; width: 500px;">HEADER</div>
+		
+		<div id="divBody">
+			<ui:insert name="body" />
+		</div>
+		
+		<div id="divFooter">FOOTER</div>
+	</h:body>
+
+	<ui:insert name="dialogs" />
+
+</f:view>
+</html>

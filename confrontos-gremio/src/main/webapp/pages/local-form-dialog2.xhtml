@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:dialog id="dlgRegisterLocal" closable="false" header="#{msg['label.register.local']}" modal="true" resizable="false" widgetVar="widgetRegisterLocal" width="570px">
+		<h:form id="formRegisterLocal">
+			<p:fieldset id="fieldset">
+				<p:separator id="sepHeader" />
+
+				<p:outputPanel id="panelBody">
+					<p:panelGrid id="gridBody" columns="2" styleClass="borderless">
+						<p:outputLabel id="labelContinent" value="#{msg['label.continent']}:" />
+						<p:outputPanel>
+							<p:selectOneMenu id="textContinent">
+								<f:selectItems value="#{combosMB.continents}" />
+							</p:selectOneMenu>
+							<p:message id="pMessageContinent" display="icon" for="textContinent" />
+						</p:outputPanel>
+
+						<p:outputLabel id="labelCountry" value="#{msg['label.country']}:" for="textCountry" />
+						<p:outputPanel>
+							<p:inputText id="textCountry" value="#{countryMB.country.name}" converter="trimConverter" maxlength="40" required="true" size="52" styleClass="alpha" />
+							<p:spacer id="spacer1" width="5px" />
+							<h:graphicImage library="image" name="pesquisar_1.png" />
+							<p:message id="pMessageCountry" display="icon" for="textCountry" />
+						</p:outputPanel>
+
+						<p:outputLabel id="labelUf" value="#{msg['label.uf']}:" />
+						<p:outputPanel>
+							<p:selectOneMenu id="textUf">
+								<f:selectItems value="#{combosMB.ufsBrazil}" />
+							</p:selectOneMenu>
+							<p:message id="pMessageUf" display="icon" for="textUf" />
+						</p:outputPanel>
+
+						<p:outputLabel id="labelCity" value="#{msg['label.city']}:" for="textCity" />
+						<p:outputPanel>
+							<p:inputText id="textCity" value="#{cityMB.city.name}" converter="trimConverter" maxlength="60" required="true" size="52" styleClass="alpha" />
+							<p:spacer id="spacer2" width="5px" />
+							<h:graphicImage library="image" name="pesquisar_1.png" />
+							<p:message id="pMessageCity" display="icon" for="textCity" />
+						</p:outputPanel>
+					</p:panelGrid>
+				</p:outputPanel>
+
+				<p:separator id="sepFooter" />
+				
+				<p:outputPanel id="panelButtons">
+					<p:commandButton id="btSave" value="#{msg['label.save']}" action="#{localMB.save}" icon="ui-icon-disk" process="@(.ui-input)" update="@(.ui-message)" />
+					<p:commandButton id="btBack" value="#{msg['label.close']}" icon="ui-icon-close" oncomplete="PF('widgetRegisterLocal').hide();" process="@this" update="gridBody">
+						<p:resetInput target="gridBody" />
+					</p:commandButton>
+				</p:outputPanel>
+				
+			</p:fieldset>
+		</h:form>
+	</p:dialog>
+</ui:composition>

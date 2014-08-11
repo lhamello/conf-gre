@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cg="http://java.sun.com/jsf/composite/components/cg" 
+	template="#{appSettingsMB.layout}">
+
+	<ui:define name="body">
+		<h:form id="form">
+			<p:fieldset id="fldLocal">
+				<p:outputPanel id="panelBody">
+					<p:focus context="panelBody" />
+				
+					<p:panelGrid id="gridBody" columns="3" styleClass="borderless">
+						<cg:localPanel id="local" continent="#{localPanelMB.continent}" />
+						<p:outputLabel value="Teste1" />
+						<p:outputLabel value="Teste2" />
+						<p:outputLabel value="Teste3" />
+						<p:outputLabel value="Teste4" />
+						<p:outputLabel value="Teste5" />
+						<p:outputLabel value="Teste6" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="dialogs">
+		<ui:include src="/pages/local-form-dialog.xhtml" />
+	</ui:define>
+
+</ui:composition>

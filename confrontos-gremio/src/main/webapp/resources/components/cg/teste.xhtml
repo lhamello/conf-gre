@@ -1,0 +1,317 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:red="http://java.sun.com/jsf/composite/components/red">
+	
+	<!-- ATRIBUTOS -->
+	<cc:interface>
+		<cc:attribute name="completeMethodMunicipio"
+					  default="completeMunicipiosRS"
+					  shortDescription="Define o método que será usado no atributo completeMethod para o autoComplete de município." />
+		
+		<cc:attribute name="controlaMunicipioSelecionado"
+					  default="true"
+					  shortDescription="Usado quando há mais de uma componente de localização na mesma tela e ao selecionar o município em um dos componente houver a 
+					  					necessidade de alterar os valores da combo de município do outro componente."
+					  type="java.lang.Boolean" />
+		
+		<cc:attribute name="remoteCommandName"
+					  default="rcLocalRemocao"
+					  shortDescription="Define o nome do componente remote command que irá atualizar os campos do endereço quando apenas um logradouro for encontrado na pesquisa."
+					  type="java.lang.String" />
+		
+		<cc:attribute name="somenteLeitura"
+					  default="false"
+					  shortDescription="Se TRUE será um componente apenas de consulta, caso contrário será um componente que terá entrada de dados. Valor padrão é FALSE."
+					  type="java.lang.Boolean" />
+		
+		<cc:attribute name="styleClass"
+					  default="fldLocalizacao"
+					  shortDescription="Define o styleClass do componente."
+					  type="java.lang.String" />
+					  
+		<cc:attribute name="styleClassLogradouro"
+					  default=""
+					  shortDescription="Define o styleClass da label Logradouro."
+					  type="java.lang.String" />					  
+					  
+		<cc:attribute name="tituloPainel"
+					  required="true"
+					  shortDescription="Campo que conterá o titulo do fieldset. Deve ser do tipo STRING."
+					  type="java.lang.String" />
+		
+		<cc:attribute name="usaTipoArea"
+					  default="true"
+					  shortDescription="Informa se o componente usará TIPO AREA. Valor padrão é TRUE."
+					  type="java.lang.Boolean" />
+		
+		<cc:attribute name="valueBairro" 
+					  required="true"
+					  shortDescription="Campo que conterá o valor do campo BAIRRO. Deve ser do tipo STRING."
+					  type="java.lang.String" />
+		
+		<cc:attribute name="valueCep" 
+					  required="true" 
+					  shortDescription="Campo que conterá o valor do campo Cep. Deve ser do tipo STRING."
+					  type="java.lang.String" />
+		
+		<cc:attribute name="valueCodLogradouro" 
+					  required="true" 
+					  shortDescription="Campo que conterá o valor do campo COD LOGRADOURO. Deve ser do tipo STRING."
+					  type="java.lang.String" />
+					  
+	  	<cc:attribute name="valueCodMunicipio" 
+	  				  required="true" 
+	  				  shortDescription="Campo que conterá o valor do campo COD MUNICIPIO. Deve ser do tipo STRING."
+	  				  type="java.lang.String" />
+		
+		<cc:attribute name="valueComplemento" 
+					  required="true" 
+					  shortDescription="Campo que conterá o valor do campo COMPLEMENTO. Deve ser do tipo STRING."
+					  type="java.lang.String" />
+					  
+		<cc:attribute name="valueLogradouro" 
+					  required="true" 
+					  shortDescription="Campo que conterá o valor do campo LOGRADOURO. Deve ser do tipo STRING."
+					  type="java.lang.String" />
+					  
+		<cc:attribute name="valueMunicipio" 
+					  required="true" 
+					  shortDescription="Campo que conterá o valor do campo MUNICÍPIO. Deve ser do tipo com.procergs.det.ed.arq3.MunicipioED."
+					  type="com.procergs.det.ed.arq3.MunicipioED" />
+		
+		<cc:attribute name="valueMunicipioSelecionadoRemocao"
+					  shortDescription="Campo que conterá o valor do campo MUNICÍPIO do local de REMOCAO. 
+					  				    Deve ser do tipo com.procergs.det.ed.arq3.MunicipioED. 
+					  				    Deve ser usado apenas para edição de Remoção de Viatura"
+					  type="com.procergs.det.ed.arq3.MunicipioED" />
+		
+		<cc:attribute name="valueMunicipioFixo"
+					  shortDescription="Campo que permite ao componente possuir somente um valor no combo município"
+					  type="com.procergs.det.ed.arq3.MunicipioED" />
+					  
+		<cc:attribute name="valueNumero" 
+					  required="true" 
+					  shortDescription="Campo que conterá o valor do campo NÚMERO. Deve ser do tipo STRING."
+					  type="java.lang.String" />
+					  
+		<cc:attribute name="valueReferencia" 
+					  required="true" 
+					  shortDescription="Campo que conterá o valor do campo REFERÊNCIA. Deve ser do tipo STRING."
+					  type="java.lang.String" />
+					  
+		<cc:attribute name="valueTipoArea" 
+					  shortDescription="Campo que conterá o valor do campo TIPO AREA. Deve ser do tipo STRING."
+					  type="java.lang.String" />		
+					  
+		<cc:attribute name="widgetName"
+					  default="widgetPesqLogradouro"
+					  shortDescription="Nome da widgetVar da modal de pesquisa de endereço. Este nome precisa ser informado quando há mais de um componente
+					  					de logradouro no mesmo form." 
+					  type="java.lang.String" />			  
+	</cc:interface>
+	
+	<!-- IMPLEMENTAÇÃO -->
+	<cc:implementation>
+		<p:fieldset id="fldLocalizacao" legend="#{cc.attrs.tituloPainel}" styleClass="#{cc.attrs.styleClass}">
+			
+			<p:remoteCommand id="rcSetarMunicipioSelecionadoRemocao"
+								 name="rcSetarMunicipioSelecionadoRemocao"
+								 partialSubmit="true"
+								 process="@this"
+								 autoRun="true"
+								 rendered="#{cc.attrs.valueMunicipioSelecionadoRemocao != null}">  
+        		<f:setPropertyActionListener target="#{localizacaoPanelMB.municipioSelecionadoRemocao}" value="#{cc.attrs.valueMunicipioSelecionadoRemocao}" />
+			</p:remoteCommand>
+			
+    		<p:remoteCommand id="rcSetarMunicipioFixo"
+								 name="rcSetarMunicipioFixo"
+								 partialSubmit="false"
+								 process="@this"
+								 autoRun="true"								 
+								 rendered="#{cc.attrs.valueMunicipioFixo != null}">  
+								 
+        		<f:setPropertyActionListener target="#{cc.attrs.valueMunicipio}" value="#{cc.attrs.valueMunicipioFixo}" />
+			</p:remoteCommand>
+				
+			<!-- MUNICÍPIO -->
+			<p:outputPanel id="boxMunicipio" styleClass="boxW525">
+				<p:outputLabel id="labelMunicipio"
+							   value="#{(cc.attrs.somenteLeitura or cc.attrs.valueMunicipioFixo != null) ? msg['comp.localizacao.municipio'] : '* '.concat(msg['comp.localizacao.municipio'])}:" 
+							   styleClass="w95 tr pr" />
+				<p:autoComplete id="autoMunicipio"
+								completeMethod="#{localizacaoPanelMB[cc.attrs.completeMethodMunicipio]}"
+								dropdown="true" 
+								forceSelection="true"
+								itemLabel="#{municipio.nomeMunic}"
+								itemValue="#{municipio}"
+								queryDelay="600"
+								minQueryLength="3"
+								rendered="#{!cc.attrs.somenteLeitura and cc.attrs.valueMunicipioFixo == null}"
+								required="true"
+								scrollHeight="250"
+								styleClass="autoComplete-ComButton-W325"
+								value="#{cc.attrs.valueMunicipio}"
+								var="municipio">
+					<f:converter converterId="genericEntityConverter"/>
+					<p:ajax event="itemSelect" 
+							listener="#{localizacaoPanelMB.verificaSegmentacaoMunicipio(cc.attrs.valueMunicipio, cc.attrs.valueLogradouro, cc.attrs.controlaMunicipioSelecionado)}"
+							update="boxArea boxMunicipio boxLogradouro"
+							oncomplete="rcLimparEndereco();" />
+				</p:autoComplete>
+				
+				<p:remoteCommand id="rcLimparEndereco"
+								 name="rcLimparEndereco"
+								 partialSubmit="true"
+								 process="@this" 
+								 update="@(fieldset[id*=\'#{cc.clientId}\'])"
+								 oncomplete="if (#{cc.attrs.usaTipoArea}) { rcLimpaTipoArea(); }">  
+        				<f:setPropertyActionListener target="#{cc.attrs.valueBairro}" value="#{null}" />
+						<f:setPropertyActionListener target="#{cc.attrs.valueCep}" value="#{null}" />
+						<f:setPropertyActionListener target="#{cc.attrs.valueCodLogradouro}" value="#{null}" />
+						<f:setPropertyActionListener target="#{cc.attrs.valueCodMunicipio}" value="#{null}" />
+						<f:setPropertyActionListener target="#{cc.attrs.valueComplemento}" value="#{null}" />
+						<f:setPropertyActionListener target="#{cc.attrs.valueLogradouro}" value="#{null}" />
+						<f:setPropertyActionListener target="#{cc.attrs.valueNumero}" value="#{null}" />
+						<f:setPropertyActionListener target="#{cc.attrs.valueReferencia}" value="#{null}" />
+    			</p:remoteCommand>
+    			 
+    			 <p:remoteCommand id="rcLimpaTipoArea"
+								 name="rcLimpaTipoArea"
+								 partialSubmit="true"
+								 process="@this" 
+								 update="@(fieldset[id*=\'#{cc.clientId}\'])">
+    			 	<f:setPropertyActionListener target="#{cc.attrs.valueTipoArea}" value="#{null}" />
+    			 </p:remoteCommand>
+    			 	
+				<p:message id="pMessageMunicipio" for="autoMunicipio" display="icon" rendered="#{!cc.attrs.somenteLeitura and cc.attrs.valueMunicipioFixo == null}" />			
+							
+				<p:outputLabel id="outputLabelMunicipio" value="#{cc.attrs.valueMunicipio.nomeMunic}" styleClass="w350 tl pl" rendered="#{cc.attrs.somenteLeitura}" /> 
+				<p:outputLabel id="outputLabelMunicipioFixo" value="#{cc.attrs.valueMunicipioFixo.nomeMunic}" styleClass="w350 tl pl" rendered="#{cc.attrs.valueMunicipioFixo != null and !cc.attrs.somenteLeitura}" />
+				
+			</p:outputPanel>
+			
+			<!-- LOGRADOURO -->
+			<p:outputPanel id="boxLogradouro" styleClass="boxW525">
+				<p:outputLabel id="labelLogradouro" 
+							   value="#{(cc.attrs.somenteLeitura) ? msg['comp.localizacao.logradouro'] : '* '.concat(msg['comp.localizacao.logradouro'])}:" styleClass="w95 tr pr #{cc.attrs.styleClassLogradouro}" />				
+				
+				<p:inputText id="textLogradouro"
+							 disabled="#{localizacaoPanelMB.isDesabilitarCampoLogradouro(cc.attrs.valueMunicipio)}"
+							 maxlength="60"
+							 required="true"
+							 rendered="#{!cc.attrs.somenteLeitura and (cc.attrs.valueMunicipioFixo == null)}"
+							 styleClass="w350 alphanum"
+							 value="#{cc.attrs.valueLogradouro}">
+					<p:ajax event="change"
+							listener="#{localizacaoPanelMB.pesquisaLogradouros(cc.attrs.valueMunicipio, cc.attrs.valueLogradouro)}" 
+							oncomplete="#{cc.attrs.widgetName}.show();"
+							process="@this" 
+							update="@(span[id$=boxTableLogradouro])" />
+				</p:inputText>
+				
+				<p:message id="pMessageLogradouro" for="textLogradouro" display="icon" rendered="#{!cc.attrs.somenteLeitura}" />
+				
+				<p:inputText id="textLogradouroMunicipioFixo"
+							 disabled="#{localizacaoPanelMB.isDesabilitarCampoLogradouro(cc.attrs.valueMunicipioFixo)}"
+							 maxlength="60"
+							 required="true"
+							 rendered="#{!cc.attrs.somenteLeitura and (cc.attrs.valueMunicipioFixo != null)}"
+							 styleClass="w350 alphanum"
+							 value="#{cc.attrs.valueLogradouro}">
+					<p:ajax event="change"
+							listener="#{localizacaoPanelMB.pesquisaLogradouros(cc.attrs.valueMunicipio, cc.attrs.valueLogradouro)}" 
+							oncomplete="#{cc.attrs.widgetName}.show();"
+							process="@this" 
+							update="@(span[id$=boxTableLogradouro])" />
+				</p:inputText>
+				
+				<p:outputLabel id="outputLabelLogradouro" value="#{cc.attrs.valueLogradouro}" styleClass="w350 tl pl" rendered="#{cc.attrs.somenteLeitura}" />
+			</p:outputPanel>
+			
+			<!-- NÚMERO -->
+			<p:outputPanel id="boxNumero" styleClass="boxW225">
+				<p:outputLabel value="#{msg['comp.localizacao.numero']}:" styleClass="w95 tr pr" />
+				
+				<p:inputText id="textNumero"
+							 maxlength="6"
+							 required="#{empty cc.attrs.valueReferencia}"
+							 styleClass="w75 numeric" 
+							 value="#{cc.attrs.valueNumero}"
+							 rendered="#{!cc.attrs.somenteLeitura}">
+					<p:ajax event="change" update="boxReferencia" />
+				</p:inputText>
+				<p:message id="pMessageNumero" for="textNumero" display="icon" rendered="#{!cc.attrs.somenteLeitura}"/>
+				
+				<p:outputLabel id="outputLabelNumero" value="#{cc.attrs.valueNumero}" styleClass="w75 tl pl" rendered="#{cc.attrs.somenteLeitura}" />
+			</p:outputPanel>
+			
+			
+			<!-- BAIRRO -->
+			<p:outputPanel id="boxBairro" styleClass="boxW275">
+				<p:outputLabel id="labelBairro" value="#{msg['comp.localizacao.bairro']}:" styleClass="w95 tr pr" />
+				
+				<p:inputText id="textBairro"
+							 maxlength="30"
+							 styleClass="w125 alpha"
+							 value="#{cc.attrs.valueBairro}" 
+							 rendered="#{!cc.attrs.somenteLeitura}">
+					<p:ajax process="@this" />
+				</p:inputText>
+							 
+				<p:outputLabel id="outputLabelBairro" value="#{cc.attrs.valueBairro}" styleClass="w125 tl pl" rendered="#{cc.attrs.somenteLeitura}" />
+			</p:outputPanel>
+			
+			<!-- COMPLEMENTO -->
+			<p:outputPanel id="boxComplemento" styleClass="boxW275">
+				<p:outputLabel id="labelComplemento" value="#{msg['comp.localizacao.complemento']}:" styleClass="w95 tr pr" />
+				
+				<p:inputText id="textComplemento" 
+							 maxlength="20"
+							 styleClass="w150 alphanum"
+							 value="#{cc.attrs.valueComplemento}"
+							 rendered="#{!cc.attrs.somenteLeitura}" />
+				
+				<p:outputLabel id="outputLabelComplemento" value="#{cc.attrs.valueComplemento}" styleClass="w150 tl pl" rendered="#{cc.attrs.somenteLeitura}" />
+			</p:outputPanel>
+			
+			<!-- TIPO AREA -->
+			<p:outputPanel id="boxArea" styleClass="boxW275 tipoArea" rendered="#{cc.attrs.usaTipoArea and localizacaoPanelMB.mostrarCampoTipoArea and !cc.attrs.somenteLeitura}">
+		        <p:selectOneRadio id="radioArea"
+		        				  required="true"
+		        				  styleClass="w275 radioAreaUrbana"
+		        				  value="#{cc.attrs.valueTipoArea}">
+		            <f:selectItems value="#{listasMB.listaTipoArea}"/>
+		            <p:ajax process="@this"/>
+		        </p:selectOneRadio>
+		        <p:message id="pMessageRadioAreaUrbana" for="radioArea" display="icon" rendered="#{!cc.attrs.somenteLeitura}" />
+		        <p:outputPanel rendered="#{cc.attrs.somenteLeitura}" >
+		        	<p:outputLabel value="#{msg['chamada.form.tipoArea']}:" styleClass="tipoarea"/>
+		        	<h:outputText value="#{cc.attrs.valueTipoArea}" styleClass="w125 tl pl mt5" converter="tipoAreaConverter"/>
+		        </p:outputPanel>
+			</p:outputPanel>
+			
+			<!-- REFERÊNCIA -->
+			<p:outputPanel id="boxReferencia" styleClass="boxW500">
+				<p:outputLabel id="labelReferencia" value="#{msg['comp.localizacao.referencia']}:" styleClass="w95 tr pr" />
+				
+				<p:inputText id="textReferencia"
+							 maxlength="100"
+							 required="#{empty cc.attrs.valueNumero}"
+							 styleClass="w350 alphanum"
+							 value="#{cc.attrs.valueReferencia}"
+							 rendered="#{!cc.attrs.somenteLeitura}" >
+					<p:ajax event="change" update="boxNumero"/>
+				</p:inputText>
+				<p:message id="pMessageReferencia" for="textReferencia" display="icon" rendered="#{!cc.attrs.somenteLeitura}" />
+				
+				<p:outputLabel id="outputLabelReferencia" value="#{cc.attrs.valueReferencia}" styleClass="w275 tl pl" rendered="#{cc.attrs.somenteLeitura}" />
+			</p:outputPanel>
+		</p:fieldset>
+	</cc:implementation>
+	
+</ui:composition>

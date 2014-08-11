@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<cc:interface>
+		<cc:attribute name="continent" 
+					  required="true"
+					  shortDescription="An object type of lham.confrontosgremio.enums.Continent" 
+					  type="lham.confrontosgremio.enums.Continent" />
+	</cc:interface>
+
+	<cc:implementation>
+		<p:fieldset id="fldLocal">
+			<p:separator id="sepHeader" />
+
+			<p:outputPanel id="panelBody">
+				<p:focus context="panelBody" />
+				
+				<p:panelGrid id="gridBody" columns="3" styleClass="borderless">
+					<p:outputLabel id="labelContinent" value="#{msg['label.continent']}:" for="autoContinent" />
+					<p:outputPanel id="panelContinent">
+						<p:autoComplete id="autoContinent" completeMethod="#{localPanelMB.completeContinent}" dropdown="true" forceSelection="true" itemLabel="#{continent.name}" itemValue="#{continent}" 
+							queryDelay="600" minQueryLength="3" required="true" scrollHeight="250" value="#{cc.attrs.continent}" var="continent" converter="entityConverter" />						
+					</p:outputPanel>
+					<p:message id="pMessageContinent" display="icon" for="autoContinent" />
+				</p:panelGrid>
+			</p:outputPanel>
+
+			<p:separator id="sepFooter" />
+
+			<p:outputPanel id="panelButtons">
+				<p:commandButton id="btSave" value="#{msg['label.save']}" action="#{localMB.save}" icon="ui-icon-disk" process="@(.ui-input)" update="@(.ui-message)" />
+				<p:commandButton id="btBack" value="#{msg['label.close']}" icon="ui-icon-close" oncomplete="PF('widgetRegisterLocal').hide();" process="@this" update="gridBody" />
+			</p:outputPanel>
+			
+		</p:fieldset>
+	</cc:implementation>
+
+</ui:composition>

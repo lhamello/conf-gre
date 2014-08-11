@@ -1,0 +1,7 @@
+.borderless tr,.borderless td {
+	border: none !important;
+}
+
+.ui-message-error {
+	float: right;
+}

@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:dialog id="dlgRegisterCity" closable="false" header="#{msg['label.register.city']}" modal="true" resizable="false" widgetVar="widgetRegisterCity" width="550px">
+		<h:form id="formRegisterCity">
+			<p:fieldset id="fieldset">
+				<p:separator id="sepHeader" />
+				
+				<p:outputPanel id="panelBody">
+					<p:panelGrid id="gridBody" columns="3" styleClass="borderless">
+						<p:outputLabel id="labelName" value="#{msg['label.name']}:" for="textName"  />
+						<p:inputText id="textName" value="#{cityMB.city.name}" converter="trimConverter" maxlength="60" required="true" size="52" styleClass="alpha" />
+						<p:message id="pMessageName" display="icon" for="textName" />
+					</p:panelGrid>
+				</p:outputPanel>
+								
+				<p:separator id="sepFooter" />
+				
+				<p:outputPanel id="panelButtons">
+					<p:commandButton id="btSave" value="#{msg['label.save']}" action="#{cityMB.save}" icon="ui-icon-disk" process="@(.ui-input)" update="@(.ui-message)" />
+					<p:commandButton id="btBack" value="#{msg['label.close']}" icon="ui-icon-close" oncomplete="PF('widgetRegisterCity').hide();" process="@this" update="gridBody">
+						<p:resetInput target="gridBody" />
+					</p:commandButton>
+				</p:outputPanel>
+				
+			</p:fieldset>
+		</h:form>
+	</p:dialog>
+</ui:composition>

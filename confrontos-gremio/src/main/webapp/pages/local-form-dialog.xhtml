@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cg="http://java.sun.com/jsf/composite/components/cg">
+
+	<p:dialog id="dlgRegisterLocal" closable="false" header="#{msg['label.register.local']}" modal="true" resizable="false" widgetVar="widgetRegisterLocal" width="570px" onShow="refreshDlgRegisterLocal()">
+		<h:form id="formRegisterLocal">
+			<p:remoteCommand id="refreshDlgRegisterLocal" name="refreshDlgRegisterLocal" action="#{localPanelMB.clearLocal()}" update="content" process="@this" />
+			
+			<p:outputPanel id="content">
+				<cg:localPanel id="local" continent="#{localPanelMB.continent}" />
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+</ui:composition>
