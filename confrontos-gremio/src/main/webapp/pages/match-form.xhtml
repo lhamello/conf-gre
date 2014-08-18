@@ -21,6 +21,12 @@
 						<p:calendar id="calDate" value="#{matchMB.entity.date}" required="true" />
 						<p:message id="pMessageDate" for="calDate" />
 					</p:outputPanel>
+					
+					<p:outputLabel id="labelOpponent" value="#{msg['label.opponent']}:" for="inputOpponent" />
+					<p:outputPanel id="panelOpponent">
+						<p:inputText id="inputOpponent" value="#{matchMB.entity.opponent.commonName}" required="true" />
+						<p:message id="pMessageOpponent" for="inputOpponent" />
+					</p:outputPanel>
 				</p:panelGrid>
 			</p:outputPanel>
 		</h:form>
