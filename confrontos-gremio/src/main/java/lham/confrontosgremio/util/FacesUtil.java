@@ -32,6 +32,16 @@ public final class FacesUtil {
     }
 
     /**
+     * Add info message to JSF context.
+     * 
+     * @param message
+     *            message that will be added.
+     */
+    public static void addInfoMessage(final String message) {
+        addMessageInContext(getContext(), FacesMessage.SEVERITY_INFO, message);
+    }
+
+    /**
      * Returns the JSF context.
      * 
      * @return JSF context.
@@ -52,7 +62,8 @@ public final class FacesUtil {
      * @param message
      *            message that will be added.
      */
-    private static void addMessageInContext(final FacesContext context, final Severity severity, final String message) {
+    private static void addMessageInContext(final FacesContext context,
+            final Severity severity, final String message) {
         context.addMessage(null, new FacesMessage(severity, null, message));
     }
 

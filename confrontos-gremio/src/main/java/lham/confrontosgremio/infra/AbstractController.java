@@ -9,20 +9,42 @@ public abstract class AbstractController<E extends AbstractModel<K>, K> implemen
 
     private static final long serialVersionUID = 1L;
 
-    private AbstractService<E, K> service;
-    private E entity;
-    private K id;
-
-    public void saveOrUpdate() {
-        if (entity.getId() == null) {
-            entity = service.insert(entity);
-            FacesUtil.addInfoMessage(MessageBundleUtil.getMessage("registro.inclui-sucesso"));
-        } else {
-            entity = service.altera(entity);
-            FacesUtil.addInfoMessage(MessageBundleUtil.getMessage("registro.altera-sucesso"));
-        }
+    protected AbstractService<E, K> service;
+    protected E entity;
+    
+    public abstract void createController();
         
-        entity = service.findById(entity.getId());
+    public E findById(final E entity) {
+        return service.findById(entity.getId());
+    }
+    
+    public void update() {
+        entity = service.update(entity);
+        FacesUtil.addInfoMessage(MessageBundleUtil.getMessage("info.message.success.update"));
+        entity = this.findById(entity);
+    }
+    
+    public String save() {
+        entity = service.insert(entity);
+        FacesUtil.addInfoMessage(MessageBundleUtil.getMessage("info.message.success.save"));
+        entity = this.findById(entity);
+        return "";
     }
 
+    public AbstractService<E, K> getService() {
+        return service;
+    }
+
+    public void setService(final AbstractService<E, K> service) {
+        this.service = service;
+    }
+
+    public E getEntity() {
+        return entity;
+    }
+
+    public void setEntity(final E entity) {
+        this.entity = entity;
+    }
+    
 }

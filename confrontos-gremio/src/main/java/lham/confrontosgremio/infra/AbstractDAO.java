@@ -54,5 +54,12 @@ public class AbstractDAO<E extends AbstractModel<K>, K> {
 
         return entity;
     }
-
+    
+    public E update(final E entity) {
+        final E mergedEntity = entityManager.merge(entity);
+        entityManager.flush();
+        
+        return mergedEntity;
+    }
+    
 }

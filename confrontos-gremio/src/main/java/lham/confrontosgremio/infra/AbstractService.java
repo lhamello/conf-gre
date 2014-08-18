@@ -32,7 +32,17 @@ public abstract class AbstractService<E extends AbstractModel<K>, K> implements 
      */
     @PostConstruct
     public abstract void initDAO();
-
+    
+    /**
+     * Sets DAO object.
+     * 
+     * @param dao DAO object.
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public void setDAO(final AbstractDAO dao) {
+        this.dao = dao;
+    }
+    
     /**
      * Find an entity by your unique identifier (primary key).
      * 
@@ -58,15 +68,9 @@ public abstract class AbstractService<E extends AbstractModel<K>, K> implements 
     public E insert(final E entity) {
         return dao.insert(entity);
     }
-
-    /**
-     * Sets DAO object.
-     * 
-     * @param dao DAO object.
-     */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void setDAO(final AbstractDAO dao) {
-        this.dao = dao;
+    
+    public E update(final E entity) {
+        return dao.update(entity);
     }
 
 }

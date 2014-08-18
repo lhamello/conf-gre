@@ -14,30 +14,18 @@
 	</cc:interface>
 
 	<cc:implementation>
-		<p:fieldset id="fldLocal">
-			<p:separator id="sepHeader" />
-
-			<p:outputPanel id="panelBody">
-				<p:focus context="panelBody" />
-				
-				<p:panelGrid id="gridBody" columns="3" styleClass="borderless">
-					<p:outputLabel id="labelContinent" value="#{msg['label.continent']}:" for="autoContinent" />
-					<p:outputPanel id="panelContinent">
-						<p:autoComplete id="autoContinent" completeMethod="#{localPanelMB.completeContinent}" dropdown="true" forceSelection="true" itemLabel="#{continent.name}" itemValue="#{continent}" 
-							queryDelay="600" minQueryLength="3" required="true" scrollHeight="250" value="#{cc.attrs.continent}" var="continent" converter="entityConverter" />						
-					</p:outputPanel>
-					<p:message id="pMessageContinent" display="icon" for="autoContinent" />
-				</p:panelGrid>
-			</p:outputPanel>
-
-			<p:separator id="sepFooter" />
-
-			<p:outputPanel id="panelButtons">
-				<p:commandButton id="btSave" value="#{msg['label.save']}" action="#{localMB.save}" icon="ui-icon-disk" process="@(.ui-input)" update="@(.ui-message)" />
-				<p:commandButton id="btBack" value="#{msg['label.close']}" icon="ui-icon-close" oncomplete="PF('widgetRegisterLocal').hide();" process="@this" update="gridBody" />
-			</p:outputPanel>
+		<p:outputPanel id="panelBody">
+			<p:focus context="panelBody" />
 			
-		</p:fieldset>
+			<p:panelGrid id="gridBody" columns="2" styleClass="borderless">
+				<p:outputLabel id="labelContinent" value="#{msg['label.continent']}:" for="autoContinent" />
+				<p:outputPanel id="panelContinent">
+					<p:autoComplete id="autoContinent" completeMethod="#{localPanelMB.completeContinent}" dropdown="true" forceSelection="true" itemLabel="#{continent.name}" itemValue="#{continent}" 
+						queryDelay="600" minQueryLength="3" required="true" scrollHeight="250" value="#{cc.attrs.continent}" var="continent" converter="entityConverter" />
+					<p:message id="pMessageContinent" display="icon" for="autoContinent" />						
+				</p:outputPanel>
+			</p:panelGrid>
+		</p:outputPanel>
 	</cc:implementation>
 
 </ui:composition>
