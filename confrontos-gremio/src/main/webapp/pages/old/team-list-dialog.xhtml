@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cg="http://java.sun.com/jsf/composite/components/cg">
+
+	<p:dialog id="dlgRegisterLocal" closable="true" header="#{msg['label.register.local']}" modal="true" resizable="false" widgetVar="widgetRegisterLocal" >
+		<h:form id="formRegisterLocal">
+			
+			<p:fieldset id="fldLocal">
+				<p:outputPanel id="content">
+					<p:separator id="sepHeader" />
+					<p:separator id="sepFooter" />
+					
+					<p:outputPanel id="panelButtons">
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:fieldset>
+		</h:form>
+	</p:dialog>
+</ui:composition>
