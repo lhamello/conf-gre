@@ -7,28 +7,47 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<f:view contentType="text/html">
-	<h:head>
-		<title>Confrontos Grêmio</title>
-	</h:head>
-
-	<h:body>
-		<h:outputStylesheet name="default.css" library="css" />
-		<h:outputStylesheet name="gremio.css" library="css" />
-		<h:outputStylesheet name="/syntaxhighlighter/syntaxhighlighter.css" library="css"  />
-		<h:outputScript library="js/plugins" name="jquery.alphanum.js" target="head" />
-		<h:outputScript library="js" name="gremio.js" target="head" />
-
-		<div id="divHeader" style="display: inline-block; width: 500px;">HEADER</div>
+	<f:view contentType="text/html">
+		<h:head>
+			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/image/favicon.ico"/>
+			<title>#{msg['app.title']}</title>
+		</h:head>
+	
+		<h:body>
+		 	<!-- CSS -->
+			<h:outputStylesheet name="default.css" library="css" />
+			<h:outputStylesheet name="confrontos-gremio.css" library="css" />
+			<h:outputStylesheet name="/syntaxhighlighter/syntaxhighlighter.css" library="css" />
+			
+			<!-- JS -->
+			<h:outputScript library="js/plugins" name="jquery.alphanum.js" target="head" />
+			<h:outputScript library="js" name="confrontos-gremio.js" target="head" />
 		
-		<div id="divBody">
-			<ui:insert name="body" />
-		</div>
-		
-		<div id="divFooter">FOOTER</div>
-	</h:body>
-
-	<ui:insert name="dialogs" />
-
-</f:view>
+			<!-- LAYOUT -->
+			<p:layout id="layout" fullPage="true" gutter="0">
+				<p:layoutUnit id="north" position="north" size="62" spacing="0" resizable="false" closable="false" gutter="0">
+					<center>
+						<div>
+							<p:graphicImage id="logoNorth" value="/resources/image/logo_gremio_grande.png" title="Grêmio"  width="35"/>
+						</div>
+					</center>					
+				</p:layoutUnit>
+				
+				<p:layoutUnit id="west" position="west" size="180" gutter="0">
+					<h:form>
+						<p:menu>
+							<ui:include src="menu.xhtml" />
+						</p:menu>
+					</h:form>
+				</p:layoutUnit>
+				
+				<p:layoutUnit id="center" position="center" gutter="0">
+					<ui:insert name="body" />
+				</p:layoutUnit>
+			</p:layout>
+		</h:body>
+	
+		<ui:insert name="dialogs" />
+	
+	</f:view>
 </html>

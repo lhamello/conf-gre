@@ -7,29 +7,26 @@
 	template="#{appSettingsMB.layout}">
 
 	<ui:define name="body">
-		<h:form id="formMatch">
-			<p:growl id="growl" globalOnly="true" sticky="true" />
-			
-			<p:outputPanel id="panelButtons">
-				<p:commandButton id="btSave" value="#{msg['label.save']}" action="#{matchMB.save()}" process="@(.ui-input)" update="@(.ui-message)" />
-			</p:outputPanel>
-			
-			<p:outputPanel id="panelContent">
-				<p:panelGrid id="gridContent" columns="2" styleClass="borderless">
-					<p:outputLabel id="labelDate" value="#{msg['label.date']}:" for="calDate" />
-					<p:outputPanel id="panelDate">
-						<p:calendar id="calDate" value="#{matchMB.entity.date}" required="true" />
-						<p:message id="pMessageDate" for="calDate" />
-					</p:outputPanel>
-					
-					<p:outputLabel id="labelOpponent" value="#{msg['label.opponent']}:" for="inputOpponent" />
+		<h:form id="matchForm">
+			<p:panel id="divMatch" header="#{msg['header.match.form']}">
+				<p:commandButton id="btSave" value="#{msg['label.save']}" icon="ui-icon-disk" process="@(.ui-input)" update="@(.ui-message)" />
+				<cg:disableEnter id="disableEnter" />
+				<p:separator id="separator" />
+
+				<p:focus id="focusMatch" context="gridBody" />
+
+				<p:panelGrid id="gridBody" columns="2" styleClass="borderless">
+					<p:outputLabel id="opponent2" value="#{msg['label.opponent']}:" />
+				
 					<p:outputPanel id="panelOpponent">
-						<p:inputText id="inputOpponent" value="#{matchMB.entity.opponent.commonName}" required="true" />
-						<p:message id="pMessageOpponent" for="inputOpponent" />
+						<cg:inputTeam id="opponent" value="texto" />
 					</p:outputPanel>
 				</p:panelGrid>
-			</p:outputPanel>
+			</p:panel>
 		</h:form>
+	</ui:define>
+
+	<ui:define name="dialogs">
 	</ui:define>
 
 </ui:composition>

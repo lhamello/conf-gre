@@ -1,0 +1,28 @@
+.borderless tr,.borderless td {
+	border: none !important;
+}
+
+.btLoupe {
+	background-image: url('../resources/image/loupe.png') !important;
+	width: 16px;
+	height: 16px;
+	background-position: 0px 0px;
+}
+
+.dn {
+	display: none;
+}
+
+.iconOnlyButton {
+	background: transparent !important;
+	border: none !important;
+	margin: 0;
+}
+
+.image:hover {
+	opacity: 0.5;
+}
+
+.ui-message-error {
+	float: right;
+}

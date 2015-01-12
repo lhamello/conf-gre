@@ -1,11 +1,11 @@
 function onlyAlpha() {
-	jQuery(".alpha").alpha();
+   jQuery(".alpha").alpha();
 }
 
 function initFunctions() {
-	onlyAlpha();
+   onlyAlpha();
 }
 
 jQuery(document).ready(function() {
-	initFunctions();
+   initFunctions();
 });
