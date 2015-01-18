@@ -1,4 +1,4 @@
-package lham.projects.confrontosgremio.infra;
+package lham.projects.confrontosgremio.test;
 
 import lham.projects.confrontosgremio.business.team.TeamTest;
 

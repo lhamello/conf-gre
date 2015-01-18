@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @Entity
 @Table(name = "TEAM")
-@NamedQueries(value = { @NamedQuery(name = "Team.findByPk", query = "SELECT t FROM Team t WHERE t.idTeam = :pk") })
+@NamedQueries(value = { @NamedQuery(name = "Team.findByPk", query = "SELECT t FROM Team t WHERE t.uniqueId = :pk") })
 public final class Team extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +32,7 @@ public final class Team extends AbstractEntity<Long> {
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Team_SEQ")
     @SequenceGenerator(name = "Team_SEQ", sequenceName = "TEAM_ID_SEQ", allocationSize = 1)
-    private Long idTeam;
+    private Long uniqueId;
 
     @Column(name = "FULL_NAME", length = 100, nullable = false)
     @Length(max = 100)
@@ -44,33 +44,30 @@ public final class Team extends AbstractEntity<Long> {
     @NotBlank
     private String commonName;
 
-    @Override
-    public Long getPrimaryKey() {
-        return this.getIdTeam();
-    }
-
-    @Override
-    public void setPrimaryKey(final Long primaryKey) {
-        this.setIdTeam(primaryKey);
+    /**
+     * Construtor vazio padrão.
+     */
+    public Team() {
+        super();
     }
 
     /**
-     * Retorna o identificador único do time.
+     * Retorna o identificador único do time.<br>
      * 
      * @return identificador único do time.
      */
-    public Long getIdTeam() {
-        return idTeam;
+    public Long getUniqueId() {
+        return uniqueId;
     }
 
     /**
      * Define o identificador único do time.
      * 
-     * @param idTeam
+     * @param uniqueId
      *            identificador único para o time.
      */
-    public void setIdTeam(final Long idTeam) {
-        this.idTeam = idTeam;
+    public void setUniqueId(final Long uniqueId) {
+        this.uniqueId = uniqueId;
     }
 
     /**
@@ -84,7 +81,7 @@ public final class Team extends AbstractEntity<Long> {
 
     /**
      * Define o nome do completo do time.<br>
-     * O nome completo devo ter no máximo 100 caracteres.
+     * O nome completo devo ter no máximo 100 caracteres e não pode ser nulo.
      * 
      * @param fullName
      *            nome completo para o time.
@@ -105,12 +102,28 @@ public final class Team extends AbstractEntity<Long> {
     /**
      * Define o nome comum do time, ou seja, o nome pelo qual o time é
      * popularmente conhecido.<br>
-     * O nome comum deve ter no máximo 30 caracteres.
+     * O nome comum deve ter no máximo 30 caracteres e não pode ser nulo.
      * 
      * @param commonName
      *            nome comum para o time.
      */
     public void setCommonName(final String commonName) {
         this.commonName = commonName;
+    }
+
+    /**
+     * Retorna a chave a primária do time que é <i>idTeam</i>.
+     */
+    @Override
+    public Long getPrimaryKey() {
+        return this.getUniqueId();
+    }
+
+    /**
+     * Define o valor da chave primária do time que é <i>idTeam</i>.
+     */
+    @Override
+    public void setPrimaryKey(final Long primaryKey) {
+        this.setUniqueId(primaryKey);
     }
 }

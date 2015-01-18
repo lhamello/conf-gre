@@ -10,6 +10,9 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 
 /**
  * Classe base para as classes DAO do sistema.
@@ -24,7 +27,7 @@ import org.hibernate.criterion.DetachedCriteria;
 public class BaseDAO<E extends AbstractEntity<K>, K> {
 
     @PersistenceContext
-    protected transient EntityManager entityManager;
+    private transient EntityManager entityManager;
     private final transient Class<E> entityClass;
 
     /**
@@ -48,9 +51,14 @@ public class BaseDAO<E extends AbstractEntity<K>, K> {
      *         critérios informados.
      */
     @SuppressWarnings("unchecked")
-    protected List<E> find(final E entity) {
+    public final List<E> find(final E entity) {
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(entityClass);
+        
+        detachedCriteria.add(Example.create(entity).enableLike(MatchMode.ANYWHERE).ignoreCase());
+        detachedCriteria.addOrder(Order.asc(entityManager.unwrap(Session.class).getSessionFactory().getClassMetadata(entityClass).getIdentifierPropertyName()));
+        
         final Criteria criteria = detachedCriteria.getExecutableCriteria(entityManager.unwrap(Session.class));
+        
         return criteria.list();
     }
 
@@ -63,7 +71,7 @@ public class BaseDAO<E extends AbstractEntity<K>, K> {
      * @return a entidade encontrada.
      */
     @SuppressWarnings("unchecked")
-    protected final E findyByPK(final K primaryKey) {
+    public final E findyByPK(final K primaryKey) {
         final String namedQuery = this.createNamedQuery("findById");
 
         final Query query = entityManager.createNamedQuery(namedQuery);
@@ -80,7 +88,7 @@ public class BaseDAO<E extends AbstractEntity<K>, K> {
      * 
      * @return a entidade persistida.
      */
-    public E insert(final E entity) {
+    public final E insert(final E entity) {
         entityManager.persist(entity);
         entityManager.flush();
 
@@ -93,7 +101,7 @@ public class BaseDAO<E extends AbstractEntity<K>, K> {
      * @param entityManager
      *            {@code entityManager} da aplicação.
      */
-    public void setEntityManager(final EntityManager entityManager) {
+    public final void setEntityManager(final EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

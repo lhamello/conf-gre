@@ -42,7 +42,7 @@ public abstract class AbstractService<E extends AbstractEntity<K>, K> implements
      * @return lista contendo os registros que atendam os critérios pesquisados;
      *         ou uma lista vazia se nenhum registro for encontrado.
      */
-    public List<E> find(final E entity) {
+    public final List<E> find(final E entity) {
         return dao.find(entity);
     }
 
@@ -54,7 +54,7 @@ public abstract class AbstractService<E extends AbstractEntity<K>, K> implements
      * 
      * @return a entidade persistida.
      */
-    public E insert(final E entity) {
+    public final E insert(final E entity) {
         return dao.insert(entity);
     }
 
@@ -65,7 +65,7 @@ public abstract class AbstractService<E extends AbstractEntity<K>, K> implements
      *            <i>DAO</i> que será gerenciado pela classe de serviço.
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void setDAO(final BaseDAO dao) {
+    public final void setDAO(final BaseDAO dao) {
         this.dao = dao;
     }
 }

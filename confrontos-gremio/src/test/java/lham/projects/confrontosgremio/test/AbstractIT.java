@@ -1,10 +1,10 @@
-package lham.projects.confrontosgremio.infra;
+package lham.projects.confrontosgremio.test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class IntegrationTestInfra {
+public abstract class AbstractIT {
 
     private static EntityManagerFactory entityManagerFactory;
     protected static EntityManager entityManager;

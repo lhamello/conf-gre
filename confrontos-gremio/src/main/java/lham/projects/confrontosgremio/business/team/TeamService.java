@@ -9,8 +9,8 @@ import javax.inject.Inject;
 import lham.projects.confrontosgremio.infra.AbstractService;
 
 /**
- * Classe de serviço para a entidade {@code Team}. Responsável por gerenciar a
- * regra de negócio desta entidade.
+ * Classe de serviço para a entidade {@code Team}. Responsável por gerenciar as
+ * regras de negócio desta entidade.
  * 
  * @author Luiz Henrique A. Mello
  * 
@@ -24,12 +24,19 @@ public class TeamService extends AbstractService<Team, Long> {
     private transient TeamDAO teamDAO;
 
     /**
+     * Construtor vazio padrão.
+     */
+    public TeamService() {
+        super();
+    }
+
+    /**
      * Responsável por inicializar a classe <i>DAO</i> utilizada por este
      * serviço, qundo o mesmo é criado.
      */
     @Override
     @PostConstruct
-    public void initDAO() {
+    public final void initDAO() {
         super.setDAO(teamDAO);
     }
 }

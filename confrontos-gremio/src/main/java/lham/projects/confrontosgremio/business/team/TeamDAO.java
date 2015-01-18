@@ -10,4 +10,10 @@ import lham.projects.confrontosgremio.infra.BaseDAO;
  */
 class TeamDAO extends BaseDAO<Team, Long> {
 
+    /**
+     * Construtor vazio padrão.
+     */
+    public TeamDAO() {
+        super();
+    }
 }

@@ -13,6 +13,7 @@ import cucumber.api.java.pt.Quando;
 public class TeamListStepsDef extends TeamContext {
 
     private List<Team> result;
+    private int numberOfTeams;
     private Team filter;
 
     /*
@@ -50,7 +51,7 @@ public class TeamListStepsDef extends TeamContext {
 
     @Dado("^que existam times cadastrados$")
     public void queExistamTimesCadastrados() throws Throwable {
-        super.insertTeam();
+        this.insertTeams();
         filter = new Team();
     }
 
@@ -58,5 +59,14 @@ public class TeamListStepsDef extends TeamContext {
     public void devoReceberUmaListaComTodosTimesCadastrados() throws Throwable {
         boolean condition = (result.size() == numberOfTeams);
         assertTrue("Devo receber uma lista com todos times cadastrados.", condition);
+    }
+    
+    private void insertTeams() {
+        numberOfTeams = 4;
+        
+        super.insertTeam("validTeam1");
+        super.insertTeam("validTeam2");
+        super.insertTeam("validTeam3");
+        super.insertTeam("validTeam4");
     }
 }
