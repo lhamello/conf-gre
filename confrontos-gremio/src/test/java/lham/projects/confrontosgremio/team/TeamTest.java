@@ -1,4 +1,4 @@
-package lham.projects.confrontosgremio.business.team;
+package lham.projects.confrontosgremio.team;
 
 import org.junit.runner.RunWith;
 

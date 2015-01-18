@@ -1,4 +1,4 @@
-package lham.projects.confrontosgremio.business.team;
+package lham.projects.confrontosgremio.team;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;

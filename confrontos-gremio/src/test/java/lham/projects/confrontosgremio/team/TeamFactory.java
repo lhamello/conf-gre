@@ -1,5 +1,6 @@
-package lham.projects.confrontosgremio.business.team;
+package lham.projects.confrontosgremio.team;
 
+import lham.projects.confrontosgremio.team.Team;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 

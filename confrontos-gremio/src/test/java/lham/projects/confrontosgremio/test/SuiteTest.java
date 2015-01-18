@@ -1,6 +1,6 @@
 package lham.projects.confrontosgremio.test;
 
-import lham.projects.confrontosgremio.business.team.TeamTest;
+import lham.projects.confrontosgremio.team.TeamTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

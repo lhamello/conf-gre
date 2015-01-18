@@ -1,4 +1,4 @@
-package lham.projects.confrontosgremio.business.team;
+package lham.projects.confrontosgremio.team;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

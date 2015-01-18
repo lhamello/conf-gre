@@ -1,10 +1,5 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cg="http://java.sun.com/jsf/composite/components/cg" 
-	template="#{appSettingsMB.layout}">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:cg="http://java.sun.com/jsf/composite/components/cg" template="#{appSettingsMB.layout}">
 
 	<ui:define name="body">
 		<h:form id="matchForm">
@@ -17,7 +12,7 @@
 
 				<p:panelGrid id="gridBody" columns="2" styleClass="borderless">
 					<p:outputLabel id="opponent2" value="#{msg['label.opponent']}:" />
-				
+
 					<p:outputPanel id="panelOpponent">
 						<cg:inputTeam id="opponent" value="texto" />
 					</p:outputPanel>

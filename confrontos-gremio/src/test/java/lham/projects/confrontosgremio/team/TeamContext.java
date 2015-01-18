@@ -1,5 +1,8 @@
-package lham.projects.confrontosgremio.business.team;
+package lham.projects.confrontosgremio.team;
 
+import lham.projects.confrontosgremio.team.Team;
+import lham.projects.confrontosgremio.team.TeamDAO;
+import lham.projects.confrontosgremio.team.TeamService;
 import lham.projects.confrontosgremio.test.AbstractIT;
 
 public class TeamContext extends AbstractIT {
