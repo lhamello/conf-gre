@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class AppSettingsBeanTest {
+public class AppSettingsBeanUT {
 
     private static final String APP_LAYOUT = "/WEB-INF/templates/layout-app.xhtml";
     private AppSettingsBean bean = new AppSettingsBean();
