@@ -54,7 +54,7 @@ public abstract class AbstractService<E extends AbstractEntity<K>, K> implements
      * 
      * @return a entidade persistida.
      */
-    public final E insert(final E entity) {
+    public E insert(final E entity) {
         return dao.insert(entity);
     }
 

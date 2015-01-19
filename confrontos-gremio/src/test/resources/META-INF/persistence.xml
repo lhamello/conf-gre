@@ -3,7 +3,7 @@
 
 	<persistence-unit name="CONFRONTOS_GREMIO_TEST" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>lham.projects.confrontosgremio.business.team.Team</class>
+		<class>lham.projects.confrontosgremio.team.Team</class>
 		
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
@@ -14,7 +14,6 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.connection.shutdown" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			<property name="hibernate.listeners.envers.autoRegister" value="false" />
 		</properties>
 	</persistence-unit>
 

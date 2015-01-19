@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import lham.projects.confrontosgremio.team.Team;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.pt.Dado;
@@ -61,10 +60,14 @@ public class TeamListStepsDef extends TeamContext {
         boolean condition = (result.size() == numberOfTeams);
         assertTrue("Devo receber uma lista com todos times cadastrados.", condition);
     }
-    
+
+    /*
+     * --------------------------------- private methods
+     */
+
     private void insertTeams() {
         numberOfTeams = 4;
-        
+
         super.insertTeam("validTeam1");
         super.insertTeam("validTeam2");
         super.insertTeam("validTeam3");

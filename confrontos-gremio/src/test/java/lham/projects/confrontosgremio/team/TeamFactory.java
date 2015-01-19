@@ -1,6 +1,5 @@
 package lham.projects.confrontosgremio.team;
 
-import lham.projects.confrontosgremio.team.Team;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 
@@ -34,6 +33,12 @@ public class TeamFactory {
             {
                 add("fullName", "Associação Esportiva Teste");
                 add("commonName", "AS Teste");
+            }
+        });
+        Fixture.of(Team.class).addTemplate("validTeam5", new Rule() {
+            {
+                add("fullName", "Juventus Football Club");
+                add("commonName", "Juventus");
             }
         });
     }

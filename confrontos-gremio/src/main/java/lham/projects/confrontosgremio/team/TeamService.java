@@ -39,4 +39,20 @@ public class TeamService extends AbstractService<Team, Long> {
     public final void initDAO() {
         super.setDAO(teamDAO);
     }
+    
+    public Team insert(Team team) {
+        if (team.getFullName() == null) {
+            throw new RuntimeException();
+        }
+        
+        if (team.getCommonName() == null) {
+            throw new RuntimeException();
+        }
+        
+        return teamDAO.insert(team);
+    }
+    
+    public void setTeamDAO(TeamDAO teamDAO) {
+        this.teamDAO = teamDAO;
+    }
 }
