@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Entidade que representa um time.
- * 
+ *  
  * @author Luiz Henrique A. Mello
  * 
  */
