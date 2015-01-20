@@ -19,8 +19,22 @@ public abstract class AbstractIT {
 
     public void closeConnection() {
         if (entityManagerFactory.isOpen()) {
-            entityManager.getTransaction().commit();
-            entityManagerFactory.close();
+            
+            if (!entityManager.getTransaction().getRollbackOnly()) {
+                this.commit();
+            } else {
+                this.rollback();
+            }
         }
+    }
+    
+    private void commit() {
+        entityManager.getTransaction().commit();
+        entityManagerFactory.close();
+    }
+    
+    private void rollback() {
+        entityManager.getTransaction().rollback();
+        entityManagerFactory.close();
     }
 }
