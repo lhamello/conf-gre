@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class AppSettingsBeanUT {
+public class LayoutControllerUT {
 
     private static final String APP_LAYOUT = "/WEB-INF/templates/layout-app.xhtml";
-    private AppSettingsBean bean = new AppSettingsBean();
+    private LayoutController bean = new LayoutController();
 
     @Test
-    public void getLayoutTest() {
+    public void shouldReturnCorrectLayout() {
         String template = bean.getLayout();
-        assertEquals("Retorno do método getLayout() deve ser igual o valor de APP_LAYOUT.", APP_LAYOUT, template);
+        assertEquals("Expected layout error.", APP_LAYOUT, template);
     }
 }
